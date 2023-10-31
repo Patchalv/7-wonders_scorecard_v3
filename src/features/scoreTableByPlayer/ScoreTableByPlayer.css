@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+:root {
+  --header: #3C3B3C;
+  --military: #D68170;
+  --armada: #93B6C9;
+  --coins: #F5F3B1;
+  --wonders: white;
+  --civic: #94BBC9;
+  --commercial: #F4DD83;
+  --scientific: #9AD29C;
+  --guild: #C9A8C8;
+  --boats: #B1DAD6;
+  --leaders: white;
+  --cities: #A8A8A8;
+  --total:  #3C3B3C;;
+}
+
+.tableFixHead { 
+  overflow: auto; 
+  height: 100vh; 
+}
+
+table {
+  border-collapse: collapse;
+  margin: 5px;
+  width: 100%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+td, th {
+  text-align: center;
+  min-width: 100px;
+}
+
+/* INDIVIDUAL ROW COLOURS */
+.militaryRow {background-color: var(--military);}
+.armadaRow {background-color: var(--armada);}
+.coinsRow {background-color: var(--coins);}
+.wondersRow {background-color: var(--wonders);}
+.civicRow {background-color: var(--civic);}
+.commercialRow {background-color: var(--commercial);}
+.scientificRow {background-color: var(--scientific);}
+.guildRow {background-color: var(--guild);}
+.boatRow {background-color: var(--boats);}
+.leaderRow {background-color: var(--leaders);}
+.citiesRow {background-color: var(--cities);}
+.totalRow {background-color: var(--total);}
+
+
+/* TABLE STICKY TOP ROW */
+
+thead tr th {
+  font-size: 18px;
+  padding: 1px;
+  border: 1px solid #eeeeee;
+  text-align: center;
+  background-color: #3C3B3C;
+  position: sticky; 
+  top: 0; 
+  z-index: 2;
+}
+
+#firstCell {
+  border: 1px solid #eeeeee;
+  background-color: var(--header);
+  position: sticky; 
+  top: 0; 
+  left: 0;
+  z-index: 3;
+}
+
+thead tr th input {
+  font-size: 16px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  width: 91%;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+  color: white;
+}
+
+thead tr th input::placeholder {
+  font-size: 16px;
+  color: white;
+}
+
+
+
+
+/* TABLE STICKY FIRST COLUMN */
+tbody tr th {
+  font-size: 16px;
+  padding: 1px;
+  border: 1px solid #eeeeee;
+  text-align: center;
+  position: sticky; 
+  left: 0; 
+  z-index: 1;
+}
+
+.leftColumn {
+  margin: auto;
+  display: flex;
+  text-align: center;
+}
+
+.categoryHeading {
+  text-align: center;
+  margin:auto;
+}
+
+.wondersIcon {
+  width: 50px;
+}
+
+span {
+  font-size: 16px;
+  color: black;
+  font-weight: 500;
+}
+
+/* TABLE FOOTER */
+
+tfoot {
+  font-size: 18px;
+  padding: 12px;
+  border: 1px solid #eeeeee;
+  text-align: center;
+  background-color: var(--total);
+  color: white;
+}
+
+tfoot tr th {
+  text-align: center;
+  padding: 10px;
+}
+
+.totalHeading {
+  text-align: center;
+  margin: auto;
+  color: white;
+  font-weight: bold;
+}
+
+.totalHeadingCell {
+  border: 1px solid #eeeeee;
+  background-color: var(--total);
+  position: sticky; 
+  left: 0;
+  z-index: 2;
+}
+
+/* TABLE INPUT CELLS */
+
+tr td {
+  border: 1px solid #eeeeee;
+  text-align: center;
+  vertical-align: middle;
+}
+
+tbody td input {
+  font-size: 14px;
+  text-align: center;
+  background-color: transparent;
+  border: none;
+  width: 91%;
+  padding: 10px;
+  font-family: 'Poppins', sans-serif;
+}
+
+tbody input:hover {
+  background-color: transparent;
+}
+
+tbody input:focus {
+  outline: 1px solid transparent;
+  border: 1px solid transparent;
+}
+
+@media only screen and (max-width: 400px) {
+  .categoryHeading {
+    display: none;
+  }
+
+  .wondersIcon {
+    margin:auto;
+  }
+
+  th {
+    min-width: 40px;
+  }
+
+  thead tr th input {
+    font-size: 16px;
+    padding: 5px;
+  }
+
+  tbody td input {
+    font-size: 14px;
+    width: 91%;
+    padding: 5px;
+  }
+  
+}
