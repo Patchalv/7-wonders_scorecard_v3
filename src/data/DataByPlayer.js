@@ -2,7 +2,7 @@ const DataByPlayer = [
     {
         playerId: '1',
         name: 'Player 1',
-        military: 0,
+        military: 100,
         armada: 0,
         coins: 0,
         wonders: 0,

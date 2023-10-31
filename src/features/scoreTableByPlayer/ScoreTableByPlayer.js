@@ -29,11 +29,6 @@ const ScoreTableByPlayer = () => {
        
     };
 
-    const updateInput = (value) => {
-        Player1.military = value;
-    }
-
-
     return (
         <div class="tableFixHead">
             <table>
@@ -98,13 +93,12 @@ const ScoreTableByPlayer = () => {
                                 src={icon_military} 
                                 alt="military icon" 
                             /> 
-                            <span class="categoryHeading">Armada</span>
+                            <span class="categoryHeading">Military</span>
                         </th>
                         <td><input
                             name="Player1.military"
                             value={Player1.military}
                             type="number"
-                            onChange={updateInput}            
                         />
                         </td>
                         <td><input
