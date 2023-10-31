@@ -196,6 +196,12 @@ tbody input:focus {
     min-width: 40px;
   }
 
+  thead tr th {
+    position: sticky; 
+    top: 0; 
+    z-index: 2;
+  }
+
   thead tr th input {
     font-size: 16px;
     padding: 5px;
