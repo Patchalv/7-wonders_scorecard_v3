@@ -17,14 +17,15 @@
 }
 
 .tableFixHead { 
-  overflow: auto; 
-  height: 100vh; 
+  overflow: auto;
 }
 
 table {
   border-collapse: collapse;
   margin: 5px;
   width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 body {
@@ -102,6 +103,7 @@ tbody tr th {
   position: sticky; 
   left: 0; 
   z-index: 1;
+  offset: 300px;
 }
 
 .leftColumn {
@@ -162,6 +164,7 @@ tr td {
   border: 1px solid #eeeeee;
   text-align: center;
   vertical-align: middle;
+  width: 100px
 }
 
 tbody td input {
@@ -184,14 +187,6 @@ tbody input:focus {
 }
 
 @media only screen and (max-width: 400px) {
-  .categoryHeading {
-    display: none;
-  }
-
-  .wondersIcon {
-    margin:auto;
-  }
-
   th {
     min-width: 40px;
   }
@@ -213,4 +208,18 @@ tbody input:focus {
     padding: 5px;
   }
   
+}
+
+@media only screen and (max-width: 800px) {
+  .categoryHeading {
+    display: none;
+  }
+
+  .wondersIcon {
+    margin:auto;
+  }
+
+  #firstCell {
+    width: 100px;
+  }
 }

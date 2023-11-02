@@ -112,7 +112,27 @@ const ScoreTableByPlayer = () => {
     const Player5 = state[4];
     const Player6 = state[5];
     const Player7 = state[6];
-  
+
+    const [count, setCount] = useState(4)
+
+    function decrementCount() {
+        //setCount(count - 1)
+        setCount(prevCount => prevCount - 1)
+    }
+
+    function incremenentCount() {
+        //setCount(count - 1)
+        setCount(prevCount => prevCount + 1)
+    }
+
+    const [citiesVisible, setCitiesVisible] = useState(true);
+    const clickCities = () => setCitiesVisible(!citiesVisible);
+
+    const [leadersVisible, setLeadersVisible] = useState(true);
+    const clickLeaders = () => setLeadersVisible(!leadersVisible);
+    
+    const [armadaVisible, setArmadaVisible] = useState(true);
+    const clickArmada = () => setArmadaVisible(!armadaVisible);
 
     return (
         <div class="tableFixHead">
@@ -237,6 +257,7 @@ const ScoreTableByPlayer = () => {
                         />
                         </td>
                     </tr>
+                    {armadaVisible ? (
                     <tr class="armadaRow">
                         <th class="leftColumn armadaRow">
                             <img class="wondersIcon" 
@@ -286,7 +307,7 @@ const ScoreTableByPlayer = () => {
                             type="number"         
                             onChange={handleArmadaScore(6)}               
                         /></td>
-                    </tr>
+                    </tr>) : null }
                     <tr class="coinsRow">
                         <th class="leftColumn coinsRow">
                             <img class="wondersIcon" 
@@ -588,6 +609,7 @@ const ScoreTableByPlayer = () => {
                             onChange={handleGuildScore(6)}              
                         /></td>
                     </tr>
+                    {armadaVisible ? (
                     <tr class="boatRow">
                         <th class="leftColumn boatRow">
                             <img class="wondersIcon" 
@@ -637,7 +659,8 @@ const ScoreTableByPlayer = () => {
                             type="number"     
                             onChange={handleBoatScore(6)}                 
                         /></td>
-                    </tr>
+                    </tr>) : null }
+                    {leadersVisible ? (
                     <tr class="leaderRow">
                         <th class="leftColumn leaderRow">
                             <img class="wondersIcon" 
@@ -687,7 +710,8 @@ const ScoreTableByPlayer = () => {
                             type="number"        
                             onChange={handleLeaderScore(6)}             
                         /></td>
-                    </tr>
+                    </tr>) : null }
+                    {citiesVisible ? (
                     <tr class="citiesRow">
                         <th class="leftColumn citiesRow">
                             <img class="wondersIcon" 
@@ -737,7 +761,7 @@ const ScoreTableByPlayer = () => {
                             type="number"      
                             onChange={handleBlackScore(6)}                
                         /></td>
-                    </tr>
+                    </tr>) : null }
                 </tbody>
                 <tfoot>
                     <tr>
@@ -752,6 +776,43 @@ const ScoreTableByPlayer = () => {
                     </tr>
                 </tfoot>
             </table>
+
+            <div class="gameOptions">
+                <div>
+                    <button onClick={decrementCount}>-</button>
+                    <span>{count}</span>
+                    <button onClick={incremenentCount}>+</button>
+                </div>
+                
+                <label for="playerSelect">Players:</label>
+
+                <select name="playerSelect" id="playerSelect">
+                    <option value="3">3</option>
+                    <option value="4" selected>4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select>
+
+                <fieldset>
+                    <legend>Expansions:</legend>
+
+                    <div>
+                        <input type="checkbox" id="leadersExpansion" name="leadersExpansion" checked={leadersVisible} onClick={clickLeaders} />
+                        <label for="leadersExpansion">Leaders</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="citiesExpansion" name="citiesExpansion" checked={citiesVisible} onClick={clickCities} />
+                        <label for="citiesExpansion">Cities</label>
+                    </div>
+
+                    <div>
+                        <input type="checkbox" id="armadaExpansion" name="armadaExpansion" checked={armadaVisible} onClick={clickArmada} />
+                        <label for="armadaExpansion">Armada</label>
+                    </div>
+                </fieldset>
+            </div>
         </div>
     )
 };
