@@ -2,7 +2,7 @@ const DataByPlayer = [
     {
         playerId: '1',
         name: 'Player 1',
-        military: 100,
+        military: 0,
         armada: 0,
         coins: 0,
         wonders: 0,
@@ -112,5 +112,22 @@ const DataByPlayer = [
         total: 0
     }
 ];
+
+export const player1Data = {
+    playerId: '1',
+    name: 'Player 1',
+    military: 100,
+    armada: 0,
+    coins: 0,
+    wonders: 0,
+    blue: 0,
+    yellow: 0,
+    green: 0,
+    purple: 0,
+    boats: 0,
+    leaders: 0,
+    black: 0,
+    total: 0
+}
 
 export default DataByPlayer;

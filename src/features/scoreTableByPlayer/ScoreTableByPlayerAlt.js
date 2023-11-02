@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useReducer} from "react";
 import DataByPlayer from "../../data/DataByPlayer";
 import "./ScoreTableByPlayer.css";
 import icon_military from '../../img/icon_military.png';
@@ -14,105 +14,74 @@ import icon_wonders from '../../img/icon_wonders.png';
 import icon_yellow from '../../img/icon_yellow.png';
 
 
-const ScoreTableByPlayer = () => {
+const ScoreTableByPlayerAlt = () => {
 
-    const handleTotalScore = (Arr, index) => {
-        Arr[index].total = Number(Arr[index].military) + Number(Arr[index].armada) + Number(Arr[index].coins) + Number(Arr[index].wonders) + Number(Arr[index].blue) + Number(Arr[index].yellow) + Number(Arr[index].green) + Number(Arr[index].purple) + Number(Arr[index].boats) + Number(Arr[index].leaders) + Number(Arr[index].black)
-    };
+    const [ player1State, dispatch ] = useReducer(
+        (player1State, action) => ({
+            ...player1State,
+            ...action,
+        }),
+        {
+            name: 'Player 1',
+            military: 100,
+            armada: 0,
+            coins: 0,
+            wonders: 0,
+            blue: 0,
+            yellow: 0,
+            green: 0,
+            purple: 0,
+            boats: 0,
+            leaders: 0,
+            black: 0,
+            total: 0,
+        }
+    );
 
-    const [state, setState] = useState(DataByPlayer);
+    const [ player2State, player2Dispatch ] = useReducer(
+        (player2State, action) => ({
+            ...player2State,
+            ...action,
+        }),
+        {
+            name: 'Player 2',
+            military: 75,
+            armada: 0,
+            coins: 0,
+            wonders: 0,
+            blue: 0,
+            yellow: 0,
+            green: 0,
+            purple: 0,
+            boats: 0,
+            leaders: 0,
+            black: 0,
+            total: 0,
+        }
+    );
+
+
+
+    const calculatePlayerTotalScore = (whichPlayer) => {
+        return Number(whichPlayer.military) + Number(whichPlayer.armada) + Number(whichPlayer.coins) + Number(whichPlayer.wonders) + Number(whichPlayer.blue) + Number(whichPlayer.yellow) + Number(whichPlayer.green) + Number(whichPlayer.purple) + Number(whichPlayer.boats) + Number(whichPlayer.leaders) + Number(whichPlayer.black);
+    }
+
+    let player1TotalScore = calculatePlayerTotalScore(player1State);
     
-    const handleNameChange = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].name = e.target.value;
-        setState(newArr);
-    };
+ 
 
-    const handleMilitaryScore = (index) => (e) => {
-      let newArr = [...state];
-      newArr[index].military = e.target.value;
-      handleTotalScore(newArr, index);
-      setState(newArr);
+    const Player1 = DataByPlayer[0];
+    const Player2 = DataByPlayer[1];
+    const Player3 = DataByPlayer[2];
+    const Player4 = DataByPlayer[3];
+    const Player5 = DataByPlayer[4];
+    const Player6 = DataByPlayer[5];
+    const Player7 = DataByPlayer[6];
+    
+    const calculatePlayerScore = (index) => {
+        return DataByPlayer[index].military + DataByPlayer[index].armada + DataByPlayer[index].coins + DataByPlayer[index].wonders + DataByPlayer[index].blue + DataByPlayer[index].yellow + DataByPlayer[index].green + DataByPlayer[index].purple + DataByPlayer[index].boats + DataByPlayer[index].leaders + DataByPlayer[index].black;
+       
     };
-
-    const handleArmadaScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].armada = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleCoinsScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].coins = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleWondersScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].wonders = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleCivicScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].blue = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleCommercialScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].yellow = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleScientificScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].green = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleGuildScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].purple = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleBoatScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].boats = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleLeaderScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].leaders = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const handleBlackScore = (index) => (e) => {
-        let newArr = [...state];
-        newArr[index].black = e.target.value;
-        handleTotalScore(newArr, index);
-        setState(newArr);
-    };
-
-    const Player1 = state[0];
-    const Player2 = state[1];
-    const Player3 = state[2];
-    const Player4 = state[3];
-    const Player5 = state[4];
-    const Player6 = state[5];
-    const Player7 = state[6];
-  
 
     return (
         <div class="tableFixHead">
@@ -122,58 +91,53 @@ const ScoreTableByPlayer = () => {
                         <th id="firstCell"></th>
                         <th>
                             <input
-                            name="name"
+                            name="Player1.name"
+                            value={player1State.name}
                             type="text"
-                            value={Player1.name}
-                            onChange={handleNameChange(0)}
+                            onChange={(e) => dispatch({name: e.target.value})}
+                            />
+                        </th>
+                        <th>
+                            <input
+                            name="Player2.name"
+                            value={player2State.name}
+                            type="text"
+                            onChange={(e) => player2Dispatch({name: e.target.value})}
                             />
                         </th>
                         <th>
                             <input
                             name="name"
                             type="text"
-                            value={Player2.name}
-                            onChange={handleNameChange(1)}
+                            placeholder="Player3"
                             />
                         </th>
                         <th>
                             <input
                             name="name"
                             type="text"
-                            value={Player3.name}
-                            onChange={handleNameChange(2)}
+                            placeholder="Player4"
                             />
                         </th>
                         <th>
                             <input
                             name="name"
                             type="text"
-                            value={Player4.name}
-                            onChange={handleNameChange(3)}
+                            placeholder="Player5"
                             />
                         </th>
                         <th>
                             <input
                             name="name"
                             type="text"
-                            value={Player5.name}
-                            onChange={handleNameChange(4)}
+                            placeholder="Player6"
                             />
                         </th>
                         <th>
                             <input
                             name="name"
                             type="text"
-                            value={Player6.name}
-                            onChange={handleNameChange(5)}
-                            />
-                        </th>
-                        <th>
-                            <input
-                            name="name"
-                            type="text"
-                            value={Player7.name}
-                            onChange={handleNameChange(6)}
+                            placeholder="Player7"
                             />
                         </th>
                     </tr>
@@ -189,51 +153,46 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             name="Player1.military"
-                            value={Player1.military}
+                            value={player1State.military}
                             type="number"
-                            onChange={handleMilitaryScore(0)}
+                            onChange={(e) => dispatch({military: e.target.value})}
                         />
                         </td>
                         <td><input
                             name="Player2.military"
-                            value={Player2.military}
+                            value={player2State.military}
                             type="number"
-                            onChange={handleMilitaryScore(1)}            
+                            onChange={(e) => player2Dispatch({military: e.target.value})}     
                         />
                         </td>
                         <td><input
                             name="Player3.military"
                             value={Player3.military}
-                            type="number"   
-                            onChange={handleMilitaryScore(2)}         
+                            type="number"            
                         />
                         </td>
                         <td><input
                             name="Player4.military"
                             value={Player4.military}
-                            type="number"  
-                            onChange={handleMilitaryScore(3)}          
+                            type="number"            
                         />
                         </td>
                         <td><input
                             name="Player5.military"
                             value={Player5.military}
-                            type="number"   
-                            onChange={handleMilitaryScore(4)}         
+                            type="number"            
                         />
                         </td>
                         <td><input
                             name="Player6.military"
                             value={Player6.military}
-                            type="number"  
-                            onChange={handleMilitaryScore(5)}          
+                            type="number"            
                         />
                         </td>
                         <td><input
                             name="Player7.military"
                             value={Player7.military}
-                            type="number"    
-                            onChange={handleMilitaryScore(6)}        
+                            type="number"            
                         />
                         </td>
                     </tr>
@@ -246,45 +205,39 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 armada"
-                            value={Player1.armada}
+                            value={player1State.armada}
                             type="number"
-                            onChange={handleArmadaScore(0)}                          
+                            onChange={(e) => dispatch({armada: e.target.value})}               
                         /></td>
                         <td><input
                             class="player2 armada"
                             value={Player2.armada}
-                            type="number" 
-                            onChange={handleArmadaScore(1)}                       
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 armada"
                             value={Player3.armada}
-                            type="number"     
-                            onChange={handleArmadaScore(2)}                   
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 armada"
                             value={Player4.armada}
-                            type="number"      
-                            onChange={handleArmadaScore(3)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 armada"
                             value={Player5.armada}
-                            type="number"  
-                            onChange={handleArmadaScore(4)}                      
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 armada"
                             value={Player6.armada}
-                            type="number"       
-                            onChange={handleArmadaScore(5)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 armada"
                             value={Player7.armada}
-                            type="number"         
-                            onChange={handleArmadaScore(6)}               
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="coinsRow">
@@ -296,45 +249,39 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 coins"
-                            value={Player1.coins}
-                            type="number"    
-                            onChange={handleCoinsScore(0)}                    
+                            value={player1State.coins}
+                            type="number" 
+                            onChange={(e) => dispatch({coins: e.target.value})}                    
                         /></td>
                         <td><input
                             class="player2 coins"
                             value={Player2.coins}
-                            type="number"           
-                            onChange={handleCoinsScore(1)}               
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 coins"
                             value={Player3.coins}
-                            type="number"     
-                            onChange={handleCoinsScore(2)}                     
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 coins"
                             value={Player4.coins}
-                            type="number"      
-                            onChange={handleCoinsScore(3)}                    
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 coins"
                             value={Player5.coins}
-                            type="number"     
-                            onChange={handleCoinsScore(4)}                     
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 coins"
                             value={Player6.coins}
-                            type="number"      
-                            onChange={handleCoinsScore(5)}                    
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 coins"
                             value={Player7.coins}
-                            type="number"       
-                            onChange={handleCoinsScore(6)}                  
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="wondersRow">
@@ -345,46 +292,40 @@ const ScoreTableByPlayer = () => {
                             <span class="categoryHeading">Wonders Board</span>
                         </th>
                         <td><input
-                            class="player1 wonders"
-                            value={Player1.wonders}
-                            type="number"  
-                            onChange={handleWondersScore(0)}                        
+                            class="player1 armada"
+                            value={player1State.wonders}
+                            type="number"
+                            onChange={(e) => dispatch({wonders: e.target.value})}      
                         /></td>
                         <td><input
                             class="player2 wonders"
                             value={Player2.wonders}
-                            type="number"          
-                            onChange={handleWondersScore(1)}            
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 wonders"
                             value={Player3.wonders}
-                            type="number"  
-                            onChange={handleWondersScore(2)}                    
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 wonders"
                             value={Player4.wonders}
-                            type="number" 
-                            onChange={handleWondersScore(3)}                     
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 wonders"
                             value={Player5.wonders}
-                            type="number"    
-                            onChange={handleWondersScore(4)}                  
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 wonders"
                             value={Player6.wonders}
-                            type="number"      
-                            onChange={handleWondersScore(5)}                
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 wonders"
                             value={Player7.wonders}
-                            type="number"         
-                            onChange={handleWondersScore(6)}             
+                            type="number"                     
                         /></td>
 
                     </tr>
@@ -397,45 +338,38 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 blue"
-                            value={Player1.blue}
-                            type="number"   
-                            onChange={handleCivicScore(0)}                   
-                        /></td>
+                            value={player1State.blue}
+                            type="number"
+                            onChange={(e) => dispatch({blue: e.target.value})}                              /></td>
                         <td><input
                             class="player2 blue"
                             value={Player2.blue}
-                            type="number"   
-                            onChange={handleCivicScore(1)}                     
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 blue"
                             value={Player3.blue}
-                            type="number"  
-                            onChange={handleCivicScore(2)}                      
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 blue"
                             value={Player4.blue}
-                            type="number"   
-                            onChange={handleCivicScore(3)}                     
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 blue"
                             value={Player5.blue}
-                            type="number"     
-                            onChange={handleCivicScore(4)}                   
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 blue"
                             value={Player6.blue}
-                            type="number"       
-                            onChange={handleCivicScore(5)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 blue"
                             value={Player7.blue}
-                            type="number"       
-                            onChange={handleCivicScore(6)}                 
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="commercialRow">
@@ -447,45 +381,38 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 yellow"
-                            value={Player1.yellow}
-                            type="number"    
-                            onChange={handleCommercialScore(0)}                    
-                        /></td>
+                            value={player1State.yellow}
+                            type="number"
+                            onChange={(e) => dispatch({yellow: e.target.value})}                              /></td>
                         <td><input
                             class="player2 yellow"
                             value={Player2.yellow}
-                            type="number"  
-                            onChange={handleCommercialScore(1)}                      
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 yellow"
                             value={Player3.yellow}
-                            type="number"       
-                            onChange={handleCommercialScore(2)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 yellow"
                             value={Player4.yellow}
-                            type="number"      
-                            onChange={handleCommercialScore(3)}                  
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 yellow"
                             value={Player5.yellow}
-                            type="number"      
-                            onChange={handleCommercialScore(4)}                  
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 yellow"
                             value={Player6.yellow}
-                            type="number"       
-                            onChange={handleCommercialScore(5)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 yellow"
                             value={Player7.yellow}
-                            type="number"       
-                            onChange={handleCommercialScore(6)}                 
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="scientificRow">
@@ -497,45 +424,38 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 green"
-                            value={Player1.green}
-                            type="number"        
-                            onChange={handleScientificScore(0)}                
-                        /></td>
+                            value={player1State.green}
+                            type="number"
+                            onChange={(e) => dispatch({green: e.target.value})}                              /></td>
                         <td><input
                             class="player2 green"
                             value={Player2.green}
-                            type="number"    
-                            onChange={handleScientificScore(1)}                  
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 green"
                             value={Player3.green}
-                            type="number"          
-                            onChange={handleScientificScore(2)}            
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 green"
                             value={Player4.green}
-                            type="number"    
-                            onChange={handleScientificScore(3)}                  
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 green"
                             value={Player5.green}
-                            type="number"            
-                            onChange={handleScientificScore(4)}          
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 green"
                             value={Player6.green}
-                            type="number"           
-                            onChange={handleScientificScore(5)}           
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 green"
                             value={Player7.green}
-                            type="number"            
-                            onChange={handleScientificScore(6)}          
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="guildRow">
@@ -547,45 +467,39 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 purple"
-                            value={Player1.purple}
-                            type="number"      
-                            onChange={handleGuildScore(0)}                
+                            value={player1State.purple}
+                            type="number"
+                            onChange={(e) => dispatch({purple: e.target.value})}                
                         /></td>
                         <td><input
                             class="player2 purple"
                             value={Player2.purple}
-                            type="number"        
-                            onChange={handleGuildScore(1)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 purple"
                             value={Player3.purple}
-                            type="number"         
-                            onChange={handleGuildScore(2)}                
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 purple"
                             value={Player4.purple}
-                            type="number"         
-                            onChange={handleGuildScore(3)}                
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 purple"
                             value={Player5.purple}
-                            type="number"          
-                            onChange={handleGuildScore(4)}               
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 purple"
                             value={Player6.purple}
-                            type="number"           
-                            onChange={handleGuildScore(5)}              
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 purple"
                             value={Player7.purple}
-                            type="number"           
-                            onChange={handleGuildScore(6)}              
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="boatRow">
@@ -597,45 +511,39 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 boats"
-                            value={Player1.boats}
-                            type="number"         
-                            onChange={handleBoatScore(0)}                
+                            value={player1State.boats}
+                            type="number"
+                            onChange={(e) => dispatch({boats: e.target.value})}             
                         /></td>
                         <td><input
                             class="player2 boats"
                             value={Player2.boats}
-                            type="number"   
-                            onChange={handleBoatScore(1)}                   
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 boats"
                             value={Player3.boats}
-                            type="number"      
-                            onChange={handleBoatScore(2)}                
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 boats"
                             value={Player4.boats}
-                            type="number"     
-                            onChange={handleBoatScore(3)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 boats"
                             value={Player5.boats}
-                            type="number"     
-                            onChange={handleBoatScore(4)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 boats"
                             value={Player6.boats}
-                            type="number"     
-                            onChange={handleBoatScore(5)}                 
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 boats"
                             value={Player7.boats}
-                            type="number"     
-                            onChange={handleBoatScore(6)}                 
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="leaderRow">
@@ -647,45 +555,39 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 leaders"
-                            value={Player1.leaders}
-                            type="number" 
-                            onChange={handleLeaderScore(0)}                     
+                            value={player1State.leaders}
+                            type="number"
+                            onChange={(e) => dispatch({leaders: e.target.value})}              
                         /></td>
                         <td><input
                             class="player2 leaders"
                             value={Player2.leaders}
-                            type="number"                
-                            onChange={handleLeaderScore(1)}     
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 leaders"
                             value={Player3.leaders}
-                            type="number"          
-                            onChange={handleLeaderScore(2)}           
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 leaders"
                             value={Player4.leaders}
-                            type="number"           
-                            onChange={handleLeaderScore(3)}          
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 leaders"
                             value={Player5.leaders}
-                            type="number"     
-                            onChange={handleLeaderScore(4)}                
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 leaders"
                             value={Player6.leaders}
-                            type="number"       
-                            onChange={handleLeaderScore(5)}              
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 leaders"
                             value={Player7.leaders}
-                            type="number"        
-                            onChange={handleLeaderScore(6)}             
+                            type="number"                     
                         /></td>
                     </tr>
                     <tr class="citiesRow">
@@ -697,58 +599,52 @@ const ScoreTableByPlayer = () => {
                         </th>
                         <td><input
                             class="player1 black"
-                            value={Player1.black}
-                            type="number"    
-                            onChange={handleBlackScore(0)}                 
+                            value={player1State.black}
+                            type="number"
+                            onChange={(e) => dispatch({black: e.target.value})}                 
                         /></td>
                         <td><input
                             class="player2 black"
                             value={Player2.black}
-                            type="number"        
-                            onChange={handleBlackScore(1)}              
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player3 black"
                             value={Player3.black}
-                            type="number"    
-                            onChange={handleBlackScore(2)}                  
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player4 black"
                             value={Player4.black}
-                            type="number"      
-                            onChange={handleBlackScore(3)}                
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player5 black"
                             value={Player5.black}
-                            type="number"         
-                            onChange={handleBlackScore(4)}             
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player6 black"
                             value={Player6.black}
-                            type="number"        
-                            onChange={handleBlackScore(5)}              
+                            type="number"                     
                         /></td>
                         <td><input
                             class="player7 black"
                             value={Player7.black}
-                            type="number"      
-                            onChange={handleBlackScore(6)}                
+                            type="number"                     
                         /></td>
                     </tr>
                 </tbody>
                 <tfoot>
                     <tr>
                         <th class="leftColumn totalHeadingCell"><span class="totalHeading">Total</span></th>
-                        <td>{Player1.total}</td>
-                        <td>{Player2.total}</td>
-                        <td>{Player3.total}</td>
-                        <td>{Player4.total}</td>
-                        <td>{Player5.total}</td>
-                        <td>{Player6.total}</td>
-                        <td>{Player7.total}</td>
+                        <td>{player1TotalScore}</td>
+                        <td>{calculatePlayerScore(1)}</td>
+                        <td>{calculatePlayerScore(2)}</td>
+                        <td>{calculatePlayerScore(3)}</td>
+                        <td>{calculatePlayerScore(4)}</td>
+                        <td>{calculatePlayerScore(5)}</td>
+                        <td>{calculatePlayerScore(6)}</td>
                     </tr>
                 </tfoot>
             </table>
@@ -756,4 +652,4 @@ const ScoreTableByPlayer = () => {
     )
 };
 
-export default ScoreTableByPlayer;
+export default ScoreTableByPlayerAlt;

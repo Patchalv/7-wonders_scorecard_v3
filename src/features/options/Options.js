@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import './Options.css';
 
 const Options = () => {
+    const [count, setCount] = useState(4)
+
+    function decrementCount() {
+        //setCount(count - 1)
+        setCount(prevCount => prevCount - 1)
+    }
+
+    function incremenentCount() {
+        //setCount(count - 1)
+        setCount(prevCount => prevCount + 1)
+    }
 
     return (
         <div class="gameOptions">
+            <div>
+                <button onClick={decrementCount}>-</button>
+                <span>{count}</span>
+                <button onClick={incremenentCount}>+</button>
+            </div>
+            
             <label for="playerSelect">Players:</label>
 
             <select name="playerSelect" id="playerSelect">
