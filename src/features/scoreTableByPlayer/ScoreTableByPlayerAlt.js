@@ -70,7 +70,7 @@ const ScoreTableByPlayerAlt = () => {
     
  
 
-    const Player1 = DataByPlayer[0];
+    //const Player1 = DataByPlayer[0];
     const Player2 = DataByPlayer[1];
     const Player3 = DataByPlayer[2];
     const Player4 = DataByPlayer[3];
