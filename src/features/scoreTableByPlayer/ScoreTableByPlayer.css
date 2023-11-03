@@ -85,7 +85,7 @@ thead tr th {
   top: 0; 
   left: 0;
   z-index: 3;
-  max-width: 300px;
+  max-width: 400px;
 }
 
 thead tr th input {
@@ -109,14 +109,15 @@ tbody tr th {
   left: 0; 
   z-index: 1;
   offset: 300px;
-  max-width: 300px;
+  min-width: 250px;
+  max-width: 400px;
 }
 
 .leftColumn {
   margin: auto;
   display: flex;
   text-align: center;
-  max-width: 300px;
+  max-width: 400px;
 }
 
 .categoryHeading {
@@ -149,7 +150,7 @@ tfoot tr th {
   text-align: center;
   padding: 10px;
   font-weight: 600;
-  max-width: 300px;
+  max-width: 400px;
 }
 
 tfoot tr td {
@@ -169,7 +170,7 @@ tfoot tr td {
   position: sticky; 
   left: 0;
   z-index: 2;
-  max-width: 300px;
+  max-width: 400px;
 }
 
 /* TABLE INPUT CELLS */
@@ -339,6 +340,10 @@ tbody input:focus {
 
   #firstCell {
     width: 100px;
+  }
+
+  tbody tr th {
+    min-width: 100px;
   }
 }
 
