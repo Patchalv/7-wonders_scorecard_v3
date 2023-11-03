@@ -8,6 +8,7 @@ function App() {
     <div className="App">
       <img class="logoImg" src={logo} alt='7 Wonders Scorecard' />
       <ScoreTableByPlayer />
+
     </div>
   );
 }
