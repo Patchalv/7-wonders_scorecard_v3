@@ -119,6 +119,9 @@ tbody tr th {
   display: flex;
   text-align: center;
   max-width: 400px;
+  position: sticky; 
+  left: 0; 
+  z-index: 1;
 }
 
 .categoryHeading {
