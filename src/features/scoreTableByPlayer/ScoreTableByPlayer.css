@@ -108,7 +108,7 @@ tbody tr th {
   text-align: center;
   position: sticky; 
   left: 0; 
-  z-index: 2;
+  z-index: 10;
   offset: 300px;
   min-width: 250px;
   max-width: 400px;
