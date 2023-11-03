@@ -7,6 +7,10 @@
   margin: 0 auto;
 }
 
+/*FOOTER*/
+
+
+
 @media only screen and (max-width: 400px) {
   .logoImg {
     max-width: 200px;

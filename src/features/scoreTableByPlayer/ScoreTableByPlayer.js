@@ -874,8 +874,13 @@ const ScoreTableByPlayer = () => {
                     </div>
                 </div>
             </div>
-            <div class="author">
-                <p class="authorText">Designed by <a href="https://patchalv.github.io/">Patrick Alvarez</a></p>
+            <div className="footer">
+                <div className="author">
+                    <p className="authorText">App design: <a href="https://patchalv.github.io/">Patrick Alvarez</a></p>
+                </div>
+                <div className="gameProducers">
+                    <p className="authorText">Original game: <a href="https://www.rprod.com/en/games/7-wonders">Repos Productions</a></p>
+                </div>
             </div>
         </div>
     )

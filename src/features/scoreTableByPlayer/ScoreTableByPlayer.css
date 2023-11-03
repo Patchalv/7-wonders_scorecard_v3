@@ -17,6 +17,7 @@
   --btn-background-grey: #f2f2f2; 
   --btn-border-grey: #ddd;
 
+  --fontsize-desk-xsm: 14px;
   --fontsize-desk-sm: 16px;
   --fontsize-desk-med: 18px;
   --fontsize-desk-lg: 20px;
@@ -298,10 +299,14 @@ tbody input:focus {
   transform: rotate(45deg);
 }
 
-.author {
+.footer {
   font-family: var(--fontfamily);
+  font-size: var(--fontsize-desk-xsm);
+  color: var(--header);
   margin-top: 50px;
+ 
 }
+
 
 /*RESPONSIVE*/
 
@@ -328,6 +333,7 @@ tbody input:focus {
   }
   
 }
+
 
 @media only screen and (max-width: 800px) {
   .categoryHeading {
