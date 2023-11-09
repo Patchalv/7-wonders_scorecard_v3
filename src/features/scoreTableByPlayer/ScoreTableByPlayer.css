@@ -72,6 +72,7 @@ td, th {
 thead tr th {
   position: sticky;
   top: 0;
+  z-index: 5;
   font-size: var(--fontsize-desk-med);
   padding: 1px;
   border: 1px solid #eeeeee;
@@ -120,9 +121,9 @@ tbody tr th {
   display: flex;
   text-align: center;
   max-width: 400px;
-  position: sticky; 
+  /*position: sticky; 
   left: 0; 
-  z-index: 2;
+  z-index: 2;*/
 }
 
 .categoryHeading {
@@ -152,6 +153,9 @@ tfoot {
 }
 
 tfoot tr th {
+  position: sticky; 
+  left: 0;
+  z-index: 2;
   text-align: center;
   padding: 10px;
   font-weight: 600;
@@ -172,9 +176,9 @@ tfoot tr td {
 
 .totalHeadingCell {
   background-color: var(--total);
-  position: sticky; 
+  /*position: sticky; 
   left: 0;
-  z-index: 2;
+  z-index: 2;*/
   max-width: 400px;
 }
 
@@ -319,11 +323,11 @@ tbody input:focus {
     min-width: 40px;
   }
 
-  thead tr th {
+  /*thead tr th {
     position: sticky; 
     top: 0; 
     z-index: 2;
-  }
+  }*/
 
   thead tr th input {
     font-size: var(--fontsize-desk-sm);
