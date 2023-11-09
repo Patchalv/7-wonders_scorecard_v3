@@ -103,13 +103,13 @@ thead tr th input {
 
 /* TABLE STICKY FIRST COLUMN */
 tbody tr th {
+  position: sticky; 
+  left: 0; 
+  z-index: 2;
   font-size: var(--fontsize-desk-med);
   padding: 1px;
   border: 1px solid #eeeeee;
   text-align: center;
-  position: sticky; 
-  left: 0; 
-  z-index: 10;
   offset: 300px;
   min-width: 250px;
   max-width: 400px;
