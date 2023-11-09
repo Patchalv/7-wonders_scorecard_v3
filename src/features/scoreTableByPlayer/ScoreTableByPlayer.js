@@ -141,7 +141,9 @@ const ScoreTableByPlayer = () => {
             <table>
                 <thead>
                     <tr>
-                        <th id="firstCell"></th>
+                        <th id="firstCell">
+                            <span> s</span>
+                        </th>
                         <th>
                             <input
                             name="name"

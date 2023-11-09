@@ -26,12 +26,13 @@
 }
 
 .tableFixHead { 
-  overflow: auto;
+  /*overflow: auto;*/
   max-width: 1000px;
   margin: 0 auto;
 }
 
 table {
+  position: relative;
   border-collapse: collapse;
   margin: 5px;
   width: 100%;
@@ -69,14 +70,14 @@ td, th {
 /* TABLE STICKY TOP ROW */
 
 thead tr th {
+  position: sticky;
+  top: 0;
   font-size: var(--fontsize-desk-med);
   padding: 1px;
   border: 1px solid #eeeeee;
   text-align: center;
   background-color: var(--header);
-  position: sticky; 
-  top: 0; 
-  z-index: 5;
+
 }
 
 #firstCell {
